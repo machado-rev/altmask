@@ -428,9 +428,9 @@ export default class AccountController extends IController {
     if (!this.loggedInAccount || !this.loggedInAccount.wallet || !this.loggedInAccount.wallet.qjsWallet) {
       throw Error('Cannot calculate max balance with no wallet instance.');
     }
-    /* MARRETA 3
-    const calcMQSPr = this.loggedInAccount.wallet.calcMaxQtumSend(this.main.network.networkName);*/
-    const calcMQSPr = this.loggedInAccount.wallet.calcMaxQtumSend();
+    
+    const calcMQSPr = this.loggedInAccount.wallet.calcMaxQtumSend(this.main.network.networkName);
+    //const calcMQSPr = this.loggedInAccount.wallet.calcMaxQtumSend();
     calcMQSPr.then(() => {
       chrome.runtime.sendMessage({ type: MESSAGE_TYPE.GET_MAX_QTUM_SEND_RETURN,
         maxQtumAmount: this.loggedInAccount!.wallet!.maxQtumSend });

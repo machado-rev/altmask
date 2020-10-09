@@ -4,7 +4,7 @@ import deepEqual from 'deep-equal';
 
 import { ISigner } from '../types';
 import { ISendTxOptions } from 'althashjs-wallet/lib/tx';
-import { RPC_METHOD /* MARRETA 4 , NETWORK_NAMES */} from '../constants';
+import { RPC_METHOD, NETWORK_NAMES } from '../constants';
 
 export default class Wallet implements ISigner {
   public qjsWallet?: QtumWallet;
@@ -55,13 +55,13 @@ export default class Wallet implements ISigner {
     return false;
   }
 
-  // @param amount: (unit - whole QTUM)
+  // @param amount: (unit - whole HTML)
   public send = async (to: string, amount: number, options: ISendTxOptions): Promise<Insight.ISendRawTxResult> => {
     if (!this.qjsWallet) {
       throw Error('Cannot send without wallet.');
     }
 
-    // convert amount units from whole QTUM => SATOSHI QTUM
+    // convert amount units from whole HTML => SATOSHI HTML
     return await this.qjsWallet!.send(to, amount * 1e8, { feeRate: options.feeRate });
   }
 
@@ -79,14 +79,7 @@ export default class Wallet implements ISigner {
       throw err;
     }
   }
-  public calcMaxQtumSend = async () => {
-    if (!this.qjsWallet || !this.info) {
-      throw Error('Cannot calculate max send amount without wallet or this.info.');
-    }
-    this.maxQtumSend = 10000000 * 1e8;
-    return this.maxQtumSend;
-  }
- /*  MARRETANDO
+
   public calcMaxQtumSend = async (networkName: string) => {
     if (!this.qjsWallet || !this.info) {
       throw Error('Cannot calculate max send amount without wallet or this.info.');
@@ -94,17 +87,15 @@ export default class Wallet implements ISigner {
     this.maxQtumSend = await this.qjsWallet.sendEstimateMaxValue(this.maxQtumSendToAddress(networkName));
     return this.maxQtumSend;
   }
-*/
+
   /**
    * We just need to pass a valid sendTo address belonging to that network for the
-   * althashjs-wallet library to calculate the maxQtumSend amount.  It does not matter what
+   * qtumjs-wallet library to calculate the maxQtumSend amount.  It does not matter what
    * the specific address is, as that does not affect the value of the
    * maxQtumSend amount
    */
-  /* MARRETA 2
   private maxQtumSendToAddress = (networkName: string) => {
     return networkName === NETWORK_NAMES.MAINNET ?
-      'Hu3K6PrHHfT3dsnrKQXdMTzjYriqiBZsgE' : 'hGeDU7YJZbZFsaHhoKZfgushVCi2fC7uJQ';
+      'Hu3K6PrHHfT3dsnrKQXdMTzjYriqiBZsgE' : 'hZAzzR9UHkwCufFzK8m6wmtTuuc2GMambj';
   }
-*/
 }

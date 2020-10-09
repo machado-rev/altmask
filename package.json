@@ -80,7 +80,7 @@
     "wif": "^2.0.6"
   },
   "description": "[![Build Status](https://travis-ci.org/machado-rev/altmask.svg?branch=master)](https://travis-ci.org/machado-rev/altmask)",
-  "version": "0.0.9",
+  "version": "1.0.5",
   "main": "webpack.base.config.js",
   "repository": {
     "type": "git",
@@ -90,12 +90,9 @@
     "altmask"
   ],
   "author": "Leandro Machado",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/machado-rev/altmask/issues"
   },
-  "homepage": "https://github.com/machado-rev/altmask#readme",
-  "directories": {
-    "doc": "doc"
-  }
+  "homepage": "https://github.com/machado-rev/altmask#readme"
 }
